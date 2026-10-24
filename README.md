@@ -2,9 +2,33 @@
 
 *[Version française](README.fr.md)*
 
+![python](https://img.shields.io/badge/python-asyncio-3776AB?logo=python&logoColor=white) ![chain](https://img.shields.io/badge/chain-Solana-9945FF?logo=solana&logoColor=white) ![mode](https://img.shields.io/badge/mode-observation_only-orange) ![audit](https://img.shields.io/badge/audit-fail--closed-red)
+
 An **observation-only** watcher for Solana memecoins launched on **pump.fun**. Several independent detectors spot new or fast-moving tokens, an anti-scam audit filters them, and a two-phase confirmation cycle tracks each survivor until a **virtual** position is opened and reported on Telegram.
 
 > **Educational project — nothing is ever bought.** No private key, no Solana wallet and no funds are involved; positions are simulated. Memecoin sniping is a very high-risk activity (nearly all of these tokens end at zero), and that observation drives every threshold and filter below.
+
+## Architecture at a glance
+
+```mermaid
+flowchart LR
+  D1[Telegram] --> Q[(SQLite<br/>candidates)]
+  D2[On-chain pump.fun] --> Q
+  D3[Momentum<br/>GeckoTerminal] --> Q
+  D4[Discord, optional] --> Q
+  Q --> A[RugCheck audit<br/>fail-closed]
+  A --> C1[Bonding-curve phase]
+  C1 --> C2[Traction phase<br/>liquidity and volume]
+  C2 --> V[Virtual position]
+  V --> T[Telegram alert<br/>/recap and /sell]
+```
+
+## Engineering highlights
+
+- **Fail-closed by design.** If the audit report is missing, malformed or the API is down, a token never moves forward: the watcher never advances anything blind.
+- **Independent detectors.** Each source runs as an isolated asyncio task, so one failing feed cannot take the others down.
+- **Patience as a filter.** A token must show real liquidity growth and volume after migration before a virtual position is opened.
+- **No funds, no keys.** Observation only, with 240+ tests and secrets confined to git-ignored files.
 
 ## How it works
 

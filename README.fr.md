@@ -2,9 +2,33 @@
 
 *[English version](README.md)*
 
+![python](https://img.shields.io/badge/python-asyncio-3776AB?logo=python&logoColor=white) ![chain](https://img.shields.io/badge/chain-Solana-9945FF?logo=solana&logoColor=white) ![mode](https://img.shields.io/badge/mode-observation_only-orange) ![audit](https://img.shields.io/badge/audit-fail--closed-red)
+
 Un watcher d'**observation uniquement** pour les memecoins Solana lancés sur **pump.fun**. Plusieurs détecteurs indépendants repèrent les tokens nouveaux ou en mouvement rapide, un audit anti-scam les filtre, puis un cycle de confirmation en deux phases suit chaque survivant jusqu'à l'ouverture d'une position **virtuelle**, signalée sur Telegram.
 
 > **Projet éducatif — rien n'est jamais acheté.** Aucune clé privée, aucun wallet Solana, aucun fonds en jeu ; les positions sont simulées. Le sniping de memecoins est une activité à très haut risque (la quasi-totalité de ces tokens finit à zéro), et ce constat guide chaque seuil et chaque filtre ci-dessous.
+
+## Architecture en un coup d'œil
+
+```mermaid
+flowchart LR
+  D1[Telegram] --> Q[(SQLite<br/>candidates)]
+  D2[On-chain pump.fun] --> Q
+  D3[Momentum<br/>GeckoTerminal] --> Q
+  D4[Discord, optional] --> Q
+  Q --> A[RugCheck audit<br/>fail-closed]
+  A --> C1[Bonding-curve phase]
+  C1 --> C2[Traction phase<br/>liquidity and volume]
+  C2 --> V[Virtual position]
+  V --> T[Telegram alert<br/>/recap and /sell]
+```
+
+## Points forts techniques
+
+- **Fail-closed par conception.** Si le rapport d'audit est absent, mal formé ou l'API en panne, un token n'avance jamais : le watcher ne fait rien progresser à l'aveugle.
+- **Des détecteurs indépendants.** Chaque source tourne en tâche asyncio isolée : un flux en panne n'emporte pas les autres.
+- **La patience comme filtre.** Un token doit montrer une vraie croissance de liquidité et de volume après migration avant l'ouverture d'une position virtuelle.
+- **Ni fonds ni clés.** Observation seule, 240+ tests, secrets confinés à des fichiers ignorés par git.
 
 ## Fonctionnement
 
