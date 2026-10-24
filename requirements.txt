@@ -1,0 +1,23 @@
+# Web3.py v7 — plus utilisée par le code actif (watcher 100% Solana/pump.fun) ;
+# gardée uniquement pour faire tourner l'ancien sniper EVM archivé
+# (_archive_evm/execution.py) si besoin de le relancer de façon autonome.
+web3>=7.6,<8
+
+# Chargement sécurisé des variables d'environnement
+python-dotenv>=1.0.1
+
+# Appels HTTP vers l'API RugCheck.xyz (audit sécurité Solana)
+requests>=2.32.3
+
+# Appels HTTP vers les API pump.fun et DexScreener (cotations Solana)
+httpx>=0.27
+
+# Base de données IANA des fuseaux horaires pour zoneinfo (Europe/Paris) —
+# fournie nativement par l'OS sur Linux mais pas toujours sur Windows.
+tzdata>=2024.1
+
+# Client Telegram (compte utilisateur) pour le détecteur d'alpha groups
+telethon>=1.36
+
+# Client Discord (bot) pour le détecteur d'alpha groups sur Discord
+discord.py>=2.4

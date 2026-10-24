@@ -1,0 +1,44 @@
+# ==================== SECRETS ====================
+# JAMAIS de clé privée ni de credentials dans le dépôt.
+.env
+.env.*
+!.env.example
+
+# ==================== ENVIRONNEMENTS VIRTUELS ====================
+venv/
+.venv/
+env/
+ENV/
+
+# ==================== CACHES PYTHON ====================
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+build/
+dist/
+
+# ==================== WORKTREES ====================
+.worktrees/
+
+# ==================== IDE / OS ====================
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# ==================== LOGS ====================
+logs/
+*.log
+
+# ==================== DONNÉES LOCALES ====================
+# Base SQLite du watcher (détections, positions virtuelles) : état local,
+# pas du code — jamais versionnée, comme forex/_cache/ dans trading_view.
+memecoins.db
+
+# Session Telegram (Telethon) : equivaut a un mot de passe de compte
+*.session
+*.session-journal
