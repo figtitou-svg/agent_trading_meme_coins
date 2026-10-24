@@ -2,7 +2,7 @@
 
 *[English version](README.md)*
 
-![python](https://img.shields.io/badge/python-asyncio-3776AB?logo=python&logoColor=white) ![chain](https://img.shields.io/badge/chain-Solana-9945FF?logo=solana&logoColor=white) ![mode](https://img.shields.io/badge/mode-observation_only-orange) ![audit](https://img.shields.io/badge/audit-fail--closed-red)
+[![CI](https://github.com/figtitou-svg/agent_trading_meme_coins/actions/workflows/ci.yml/badge.svg)](https://github.com/figtitou-svg/agent_trading_meme_coins/actions/workflows/ci.yml) ![License: MIT](https://img.shields.io/badge/license-MIT-green) ![python](https://img.shields.io/badge/python-asyncio-3776AB?logo=python&logoColor=white) ![chain](https://img.shields.io/badge/chain-Solana-9945FF?logo=solana&logoColor=white) ![mode](https://img.shields.io/badge/mode-observation_only-orange) ![audit](https://img.shields.io/badge/audit-fail--closed-red)
 
 Un watcher d'**observation uniquement** pour les memecoins Solana lancés sur **pump.fun**. Plusieurs détecteurs indépendants repèrent les tokens nouveaux ou en mouvement rapide, un audit anti-scam les filtre, puis un cycle de confirmation en deux phases suit chaque survivant jusqu'à l'ouverture d'une position **virtuelle**, signalée sur Telegram.
 
@@ -77,3 +77,7 @@ Sans `--listen`, `main.py` n'affiche que l'aide : il n'existe volontairement pas
 - Aucune clé privée ni wallet n'est nécessaire dans cette phase ; le watcher se contente d'observer.
 - Les identifiants API Telegram et le fichier de session Telethon vivent uniquement dans `.env` et des fichiers locaux ignorés par git — ne les commite jamais. Un fichier de session équivaut à un mot de passe de compte.
 - Les noms de champs JSON de RugCheck suivent le format documenté au moment de l'écriture ; à vérifier sur une vraie réponse avant de s'y fier, un schéma tiers pouvant changer.
+
+## Licence
+
+[MIT](LICENSE)
